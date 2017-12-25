@@ -1,0 +1,56 @@
+---
+
+- hosts: all
+
+  connection: local
+  user: '{{ ansible_ssh_user }}'
+  gather_facts: 'no'
+
+  tasks:
+    - name: validate connection from rtr-1
+      vyos_command:
+        commands: 'ping {{ item }} count 4'
+      when: "'rtr-1' in inventory_hostname"
+      with_items:
+        - '10.0.255.2'
+        - '10.0.255.6'
+
+    - name: validate connection from rtr-2
+      vyos_command:
+        commands: 'ping {{ item }} count 4'
+      when: "'rtr-2' in inventory_hostname"
+      with_items:
+        - '10.0.255.1'
+        - '10.0.254.1'
+        - '10.0.253.2'
+
+    - name: validate connection from rtr-3
+      vyos_command:
+        commands: 'ping {{ item }} count 4'
+      when: "'rtr-3' in inventory_hostname"
+      with_items:
+        - '10.0.255.5'
+        - '10.0.254.5'
+        - '10.0.253.1'
+
+    - name: validate connection from rtr-4
+      vyos_command:
+        commands: 'ping {{ item }} count 4'
+      when: "'rtr-4' in inventory_hostname"
+      with_items:
+        - '10.0.254.2'
+        - '10.0.254.6'
+
+    - name: validate bgp connection from rtr-1
+      vyos_command:
+        commands: 'ping {{ item }} count 4'
+      when: "'rtr-1' in inventory_hostname"
+      with_items:
+        - '10.255.0.4'
+
+    - name: validate bgp connection from rtr-4
+      vyos_command:
+        commands: 'ping {{ item }} count 4'
+      when: "'rtr-4' in inventory_hostname"
+      with_items:
+        - '10.255.0.1'
