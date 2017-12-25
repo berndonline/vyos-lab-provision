@@ -1,0 +1,32 @@
+---
+
+hostname: rtr-4
+domain_name: lab.local
+
+loopback:
+  dum0:
+    alias: dummy loopback0
+    address: 10.255.0.4
+    mask: /32
+
+interfaces:
+  eth1:
+    alias: connection rtr-2
+    address: 10.0.254.1
+    mask: /30
+
+  eth2:
+    alias: connection rtr-3
+    address: 10.0.254.5
+    mask: /30
+
+bgp:
+  asn: 65002
+  neighbor:
+    - { address: 10.0.254.2, remote_as: 65000}
+    - { address: 10.0.254.6, remote_as: 65000}
+  networks:
+    - { network: 10.0.254.0, mask: /30 }
+    - { network: 10.0.254.4, mask: /30 }
+    - { network: 10.255.0.4, mask: /32 }
+  maxpath: 2
