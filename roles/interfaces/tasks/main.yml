@@ -1,0 +1,5 @@
+---
+
+- name: write interfaces config
+  vyos_config:
+    src: "templates/interfaces.j2"

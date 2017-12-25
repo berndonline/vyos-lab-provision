@@ -1,0 +1,13 @@
+{% if loopback is defined %}
+{% for port, value in loopback.items() %}
+set interfaces dummy {{ port }} address '{{ value.address }}{{ value.mask }}'
+set interfaces dummy {{ port }} description '{{ value.alias }}'
+{% endfor %}
+{% endif %}
+
+{% if interfaces is defined %}
+{% for port, value in interfaces.items() %}
+set interfaces ethernet {{ port }} address '{{ value.address }}{{ value.mask }}'
+set interfaces ethernet {{ port }} description '{{ value.alias }}'
+{% endfor %}
+{% endif %}

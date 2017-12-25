@@ -1,0 +1,13 @@
+{% if bgp is defined %}
+{% if bgp.maxpath is defined %}
+set protocols bgp {{ bgp.asn }} maximum-paths ebgp '{{ bgp.maxpath }}'
+{% endif %}
+{% for item in bgp.neighbor %}
+set protocols bgp {{ bgp.asn }} neighbor {{ item.address }} ebgp-multihop '2'
+set protocols bgp {{ bgp.asn }} neighbor {{ item.address }} remote-as '{{ item.remote_as }}'
+{% endfor %}
+{% for item in bgp.networks %}
+set protocols bgp {{ bgp.asn }} network '{{ item.network }}{{ item.mask }}'
+{% endfor %}
+set protocols bgp {{ bgp.asn }} parameters router-id '{{ loopback.dum0.address }}'
+{% endif %}

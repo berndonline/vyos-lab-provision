@@ -1,0 +1,6 @@
+---
+
+- name: write hostname and domain-name
+  vyos_system:
+    host_name: '{{ hostname }}'
+    domain_name: '{{ domain_name }}'

@@ -31,6 +31,6 @@ bgp:
     - {address: 10.0.254.5, remote_as: 65002}
     - {address: 10.0.255.5, remote_as: 65001}
   networks:
-    - {network: 10.0.254.4, mask: /30 }
-    - {network: 10.0.255.4, mask: /30 }
-    - {network: 10.255.0.3, mask: /32 }
+    - {network: 10.0.254.4, mask: /30}
+    - {network: 10.0.255.4, mask: /30}
+    - {network: 10.255.0.3, mask: /32}
